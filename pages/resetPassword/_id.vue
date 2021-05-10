@@ -11,13 +11,8 @@
             alt="Company Logo"
           />
           <h2 class="mt-4 text-3xl font-extrabold text-gray-900">
-            Forgot Password?
+            Reset Password
           </h2>
-          <p class="mt-2 text-sm text-gray-600">
-            To reset your password, enter your email below and submit. An email
-            will be sent to you with instructions about how to complete the
-            process.
-          </p>
         </div>
 
         <div class="mt-8">
@@ -25,25 +20,44 @@
             <form
               action="#"
               class="space-y-3"
-              @submit.prevent="forgotPassword()"
+              @submit.prevent="resetPassword()"
             >
-              <!-- Email -->
+              <!-- Password -->
               <div>
                 <label
-                  for="email"
+                  for="password"
                   class="block text-sm font-medium text-gray-700"
                 >
-                  Email address
+                  Password
                 </label>
                 <div class="mt-1">
                   <input
-                    id="email"
-                    v-model="user.email"
-                    name="email"
-                    type="email"
-                    autocomplete="email"
+                    id="password"
+                    v-model="user.password"
+                    name="password"
+                    type="password"
                     required
-                    placeholder="you@example.com"
+                    placeholder="Enter your new password here"
+                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+              <!-- Confirm Password -->
+              <div>
+                <label
+                  for="passwordConfirm"
+                  class="block text-sm font-medium text-gray-700"
+                >
+                  Password Confirm
+                </label>
+                <div class="mt-1">
+                  <input
+                    id="passwordConfirm"
+                    v-model="user.passwordConfirm"
+                    name="passwordConfirm"
+                    type="password"
+                    required
+                    placeholder="Confirm your new password"
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                   />
                 </div>
@@ -73,7 +87,7 @@
                   type="submit"
                   class="w-full flex justify-center py-2 px-4 mt-6 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                 >
-                  Send Recovery Email
+                  Reset Password
                 </button>
               </div>
               <div class="flex items-center justify-center">
@@ -103,23 +117,31 @@
 
 <script>
 export default {
+  asyncData({ params }) {
+    const id = params.id
+    return {
+      id,
+    }
+  },
   data() {
     return {
       user: {
-        email: '',
+        password: '',
+        passwordConfirm: '',
       },
       errMessages: [],
       sucMessages: [],
     }
   },
   methods: {
-    async forgotPassword() {
+    async resetPassword() {
       try {
         this.resetState()
-        const response = await this.$authApi.forgotPassword(this.user)
+        const response = await this.$authApi.resetPassword(this.id, this.user)
         // User was successfully authenticated
         if (response.status === 200) {
-          this.user.email = ''
+          this.user.password = ''
+          this.user.passwordConfirm = ''
           this.sucMessages.push(response.data.data.message)
         }
       } catch (err) {

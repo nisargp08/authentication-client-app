@@ -109,12 +109,7 @@
           </div>
 
           <div class="mt-6">
-            <form
-              action="#"
-              method="POST"
-              class="space-y-3"
-              @submit.prevent="loginUser()"
-            >
+            <form action="#" class="space-y-3" @submit.prevent="loginUser()">
               <!-- Email -->
               <div>
                 <label
@@ -151,6 +146,7 @@
                     name="password"
                     type="password"
                     autocomplete="password"
+                    placeholder="********"
                     required
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                   />

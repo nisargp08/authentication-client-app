@@ -100,12 +100,7 @@
           </div>
 
           <div class="mt-6">
-            <form
-              action="#"
-              method="POST"
-              class="space-y-3"
-              @submit.prevent="registerUser()"
-            >
+            <form action="#" class="space-y-3" @submit.prevent="registerUser()">
               <!-- Username -->
               <div>
                 <label

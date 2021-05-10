@@ -5,6 +5,7 @@ export default function ({ $axios }, inject) {
     registerUser,
     loginUser,
     forgotPassword,
+    resetPassword,
   })
 
   // Functions
@@ -36,6 +37,16 @@ export default function ({ $axios }, inject) {
   async function forgotPassword(user) {
     try {
       return await $axios.patch(`${authServer}/forgotPassword`, user)
+    } catch (err) {
+      setErrorMessage(err)
+    }
+  }
+  async function resetPassword(resetToken, user) {
+    try {
+      return await $axios.patch(
+        `${authServer}/resetPassword/${resetToken}`,
+        user
+      )
     } catch (err) {
       setErrorMessage(err)
     }
