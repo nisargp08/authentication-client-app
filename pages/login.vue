@@ -11,14 +11,23 @@
             alt="Company Logo"
           />
           <h2 class="mt-4 text-3xl font-extrabold text-gray-900">
-            Sign up to join <span class="text-yellow-600">Auth</span>
+            Login to <span class="text-yellow-600">Auth</span>
           </h2>
+          <p class="mt-2 text-sm text-gray-600">
+            To
+            <a
+              href="#"
+              class="font-medium text-yellow-600 hover:text-yellow-500"
+            >
+              do absolutely nothing 😁
+            </a>
+          </p>
         </div>
 
         <div class="mt-8">
           <div>
             <div>
-              <p class="text-sm font-medium text-gray-700">Sign up with</p>
+              <p class="text-sm font-medium text-gray-700">Login with</p>
 
               <div class="mt-1 grid grid-cols-3 gap-3">
                 <div>
@@ -26,7 +35,7 @@
                     href="#"
                     class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                   >
-                    <span class="sr-only">Sign in with Facebook</span>
+                    <span class="sr-only">Login in with Facebook</span>
                     <svg
                       class="w-5 h-5"
                       fill="currentColor"
@@ -47,7 +56,7 @@
                     href="#"
                     class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                   >
-                    <span class="sr-only">Sign in with Twitter</span>
+                    <span class="sr-only">Login in with Twitter</span>
                     <svg
                       class="w-5 h-5"
                       fill="currentColor"
@@ -66,7 +75,7 @@
                     href="#"
                     class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                   >
-                    <span class="sr-only">Sign in with GitHub</span>
+                    <span class="sr-only">Login in with GitHub</span>
                     <svg
                       class="w-5 h-5"
                       fill="currentColor"
@@ -104,45 +113,25 @@
               action="#"
               method="POST"
               class="space-y-3"
-              @submit.prevent="registerUser()"
+              @submit.prevent="loginUser()"
             >
-              <!-- Username -->
-              <div>
-                <label
-                  for="username"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  Username
-                </label>
-                <div class="mt-1">
-                  <input
-                    id="username"
-                    v-model="user.username"
-                    name="username"
-                    type="text"
-                    autocomplete="username"
-                    required
-                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
-                  />
-                </div>
-              </div>
               <!-- Email -->
               <div>
                 <label
-                  for="email"
+                  for="userId"
                   class="block text-sm font-medium text-gray-700"
                 >
-                  Email address
+                  Username/Email
                 </label>
                 <div class="mt-1">
                   <input
-                    id="email"
-                    v-model="user.email"
-                    name="email"
-                    type="email"
+                    id="userId"
+                    v-model="user.userId"
+                    name="userId"
+                    type="text"
                     autocomplete="email"
-                    placeholder="you@example.com"
                     required
+                    placeholder="you@example.com"
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                   />
                 </div>
@@ -161,28 +150,36 @@
                     v-model="user.password"
                     name="password"
                     type="password"
+                    autocomplete="password"
                     required
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                   />
                 </div>
               </div>
-              <!-- Password confirm -->
-              <div class="space-y-1">
-                <label
-                  for="passwordConfirm"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  Password Confirm
-                </label>
-                <div class="mt-1">
+              <!-- FOrgot password -->
+              <div class="flex items-center justify-end">
+                <!-- <div class="flex items-center">
                   <input
-                    id="passwordConfirm"
-                    v-model="user.passwordConfirm"
-                    name="passwordConfirm"
-                    type="password"
-                    required
-                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+                    id="remember_me"
+                    name="remember_me"
+                    type="checkbox"
+                    class="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
                   />
+                  <label
+                    for="remember_me"
+                    class="ml-2 block text-sm text-gray-900"
+                  >
+                    Remember me
+                  </label>
+                </div> -->
+
+                <div class="text-sm">
+                  <nuxt-link
+                    :to="{ name: 'forgotPassword' }"
+                    class="font-medium text-yellow-600 hover:text-yellow-500"
+                  >
+                    Forgot your password?
+                  </nuxt-link>
                 </div>
               </div>
               <!-- Error message -->
@@ -200,19 +197,19 @@
                   type="submit"
                   class="w-full flex justify-center py-2 px-4 mt-6 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                 >
-                  Sign up
+                  Login
                 </button>
               </div>
               <div class="flex items-center justify-center">
                 <div class="text-sm text-center">
                   <p class="font-medium text-gray-500">
-                    Already got an account?
+                    Don't have an account?
                   </p>
                   <nuxt-link
-                    :to="{ name: 'login' }"
+                    :to="{ name: 'signup' }"
                     class="font-medium text-yellow-600 hover:text-yellow-500"
                   >
-                    Login now
+                    Sign up here
                   </nuxt-link>
                 </div>
               </div>
@@ -236,28 +233,20 @@ export default {
   data() {
     return {
       user: {
-        username: '',
-        email: '',
+        userId: '',
         password: '',
-        passwordConfirm: '',
       },
       errMessages: [],
     }
   },
-  mounted() {
-    this.user.username = 'moi89'
-    this.user.email = 'nisargp42@gmail.com'
-    this.user.password = '123'
-    this.user.passwordConfirm = 'work1234'
-  },
   methods: {
-    async registerUser() {
+    async loginUser() {
       try {
         this.resetState()
-        const response = await this.$authApi.registerUser(this.user)
-        // User was successfully created
-        if (response.status === 201) {
-          this.$router.push({ name: 'login' })
+        const response = await this.$authApi.loginUser(this.user)
+        // User was successfully authenticated
+        if (response.status === 200) {
+          console.log(response.data)
         }
       } catch (err) {
         if (err.message.includes(',')) {
