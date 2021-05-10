@@ -1,126 +1,166 @@
 <template>
-  <div class="min-h-screen bg-white flex">
-    <div
-      class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24"
-    >
-      <div class="mx-auto w-full max-w-sm lg:w-96">
-        <div>
-          <img
-            class="h-14 w-auto"
-            src="/images/one-piece-logo.png"
-            alt="Company Logo"
-          />
-          <h2 class="mt-4 text-3xl font-extrabold text-gray-900">
-            Reset Password
-          </h2>
-        </div>
-
-        <div class="mt-8">
-          <div class="mt-6">
-            <form
-              action="#"
-              class="space-y-3"
-              @submit.prevent="resetPassword()"
+  <section>
+    <template v-if="isPageDisabled">
+      <div
+        class="bg-gray-900 flex flex-col items-center justify-center min-h-screen h-full"
+      >
+        <img class="rounded-md" src="/images/error.webp" alt="Error" />
+        <div class="flex items-center justify-center mt-6">
+          <div class="text-sm text-center">
+            <nuxt-link
+              :to="{ name: 'login' }"
+              class="py-2 px-4 mt-6 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
             >
-              <!-- Password -->
-              <div>
-                <label
-                  for="password"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  Password
-                </label>
-                <div class="mt-1">
-                  <input
-                    id="password"
-                    v-model="user.password"
-                    name="password"
-                    type="password"
-                    required
-                    placeholder="Enter your new password here"
-                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
-                  />
-                </div>
-              </div>
-              <!-- Confirm Password -->
-              <div>
-                <label
-                  for="passwordConfirm"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  Password Confirm
-                </label>
-                <div class="mt-1">
-                  <input
-                    id="passwordConfirm"
-                    v-model="user.passwordConfirm"
-                    name="passwordConfirm"
-                    type="password"
-                    required
-                    placeholder="Confirm your new password"
-                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
-                  />
-                </div>
-              </div>
-              <!-- Error message -->
-              <template v-if="errMessages.length > 0">
-                <div
-                  class="text-sm bg-red-100 text-red-700 font-medium rounded-md py-2 px-4"
-                >
-                  <p v-for="(error, index) in errMessages" :key="index">
-                    {{ error }}
-                  </p>
-                </div>
-              </template>
-              <!-- Success message -->
-              <template v-if="sucMessages.length > 0">
-                <div
-                  class="text-sm bg-green-100 text-green-700 font-medium rounded-md py-2 px-4"
-                >
-                  <p v-for="(success, index) in sucMessages" :key="index">
-                    {{ success }}
-                  </p>
-                </div>
-              </template>
-              <div>
-                <button
-                  type="submit"
-                  class="w-full flex justify-center py-2 px-4 mt-6 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-                >
-                  Reset Password
-                </button>
-              </div>
-              <div class="flex items-center justify-center">
-                <div class="text-sm text-center">
-                  <nuxt-link
-                    :to="{ name: 'login' }"
-                    class="font-medium text-yellow-600 hover:text-yellow-500"
-                  >
-                    Login now
-                  </nuxt-link>
-                </div>
-              </div>
-            </form>
+              Login now
+            </nuxt-link>
           </div>
         </div>
       </div>
-    </div>
-    <div class="hidden lg:block relative w-0 flex-1">
-      <img
-        class="absolute inset-0 h-full w-full object-cover"
-        src="/images/login-bg.jpg"
-        alt=""
-      />
-    </div>
-  </div>
+    </template>
+    <template v-else>
+      <div class="min-h-screen bg-white flex">
+        <div
+          class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24"
+        >
+          <div class="mx-auto w-full max-w-sm lg:w-96">
+            <div>
+              <img
+                class="h-14 w-auto"
+                src="/images/one-piece-logo.png"
+                alt="Company Logo"
+              />
+              <h2 class="mt-4 text-3xl font-extrabold text-gray-900">
+                Reset Password
+              </h2>
+            </div>
+
+            <div class="mt-8">
+              <div class="mt-6">
+                <form
+                  action="#"
+                  class="space-y-3"
+                  @submit.prevent="resetPassword()"
+                >
+                  <!-- Password -->
+                  <div>
+                    <label
+                      for="password"
+                      class="block text-sm font-medium text-gray-700"
+                    >
+                      Password
+                    </label>
+                    <div class="mt-1">
+                      <input
+                        id="password"
+                        v-model="user.password"
+                        name="password"
+                        type="password"
+                        required
+                        placeholder="Enter your new password here"
+                        class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+                      />
+                    </div>
+                  </div>
+                  <!-- Confirm Password -->
+                  <div>
+                    <label
+                      for="passwordConfirm"
+                      class="block text-sm font-medium text-gray-700"
+                    >
+                      Password Confirm
+                    </label>
+                    <div class="mt-1">
+                      <input
+                        id="passwordConfirm"
+                        v-model="user.passwordConfirm"
+                        name="passwordConfirm"
+                        type="password"
+                        required
+                        placeholder="Confirm your new password"
+                        class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+                      />
+                    </div>
+                  </div>
+                  <!-- Error message -->
+                  <template v-if="errMessages.length > 0">
+                    <div
+                      class="text-sm bg-red-100 text-red-700 font-medium rounded-md py-2 px-4"
+                    >
+                      <p v-for="(error, index) in errMessages" :key="index">
+                        {{ error }}
+                      </p>
+                    </div>
+                  </template>
+                  <!-- Success message -->
+                  <template v-if="sucMessages.length > 0">
+                    <div
+                      class="text-sm bg-green-100 text-green-700 font-medium rounded-md py-2 px-4"
+                    >
+                      <p v-for="(success, index) in sucMessages" :key="index">
+                        {{ success }}
+                      </p>
+                    </div>
+                  </template>
+                  <div>
+                    <button
+                      type="submit"
+                      class="w-full flex justify-center py-2 px-4 mt-6 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                    >
+                      Reset Password
+                    </button>
+                  </div>
+                  <div class="flex items-center justify-center">
+                    <div class="text-sm text-center">
+                      <nuxt-link
+                        :to="{ name: 'login' }"
+                        class="font-medium text-yellow-600 hover:text-yellow-500"
+                      >
+                        Login now
+                      </nuxt-link>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hidden lg:block relative w-0 flex-1">
+          <img
+            class="absolute inset-0 h-full w-full object-cover"
+            src="/images/login-bg.jpg"
+            alt=""
+          />
+        </div>
+      </div>
+    </template>
+  </section>
 </template>
 
 <script>
 export default {
-  asyncData({ params }) {
+  async asyncData({ params, $authApi }) {
     const id = params.id
+    const sucMessages = []
+    let errMessages = []
+    let isPageDisabled = true
+    try {
+      const response = await $authApi.checkResetToken(id)
+      if (response.data.status === 'success') {
+        isPageDisabled = false
+      }
+    } catch (err) {
+      if (err.message.includes(',')) {
+        const messages = err.message.split(',')
+        errMessages = messages
+      } else {
+        errMessages.push(err.message)
+      }
+    }
     return {
       id,
+      isPageDisabled,
+      errMessages,
+      sucMessages,
     }
   },
   data() {
@@ -129,8 +169,6 @@ export default {
         password: '',
         passwordConfirm: '',
       },
-      errMessages: [],
-      sucMessages: [],
     }
   },
   methods: {

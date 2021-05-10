@@ -115,6 +115,7 @@
                     v-model="user.username"
                     name="username"
                     type="text"
+                    placeholder="ana99"
                     autocomplete="username"
                     required
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
@@ -156,6 +157,7 @@
                     v-model="user.password"
                     name="password"
                     type="password"
+                    placeholder="********"
                     required
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                   />
@@ -175,6 +177,7 @@
                     v-model="user.passwordConfirm"
                     name="passwordConfirm"
                     type="password"
+                    placeholder="********"
                     required
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                   />
@@ -238,12 +241,6 @@ export default {
       },
       errMessages: [],
     }
-  },
-  mounted() {
-    this.user.username = 'moi89'
-    this.user.email = 'nisargp42@gmail.com'
-    this.user.password = '123'
-    this.user.passwordConfirm = 'work1234'
   },
   methods: {
     async registerUser() {
