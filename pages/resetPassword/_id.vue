@@ -15,89 +15,76 @@
       </div>
     </template>
     <template v-else>
-      <div class="min-h-screen bg-white flex">
-        <div
-          class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24"
-        >
-          <div class="mx-auto w-full max-w-sm lg:w-96">
-            <div>
-              <logo></logo>
-              <h2 class="split-title">Reset Password</h2>
-            </div>
-
-            <div class="mt-8">
-              <div class="mt-6">
-                <form
-                  action="#"
-                  class="space-y-3"
-                  @submit.prevent="resetPassword()"
-                >
-                  <!-- Password -->
-                  <div>
-                    <label for="password" class="form-label"> Password </label>
-                    <div class="mt-1">
-                      <input
-                        id="password"
-                        v-model="user.password"
-                        name="password"
-                        type="password"
-                        required
-                        placeholder="Enter your new password here"
-                        class="form-input"
-                      />
-                    </div>
-                  </div>
-                  <!-- Confirm Password -->
-                  <div>
-                    <label for="passwordConfirm" class="form-label">
-                      Password Confirm
-                    </label>
-                    <div class="mt-1">
-                      <input
-                        id="passwordConfirm"
-                        v-model="user.passwordConfirm"
-                        name="passwordConfirm"
-                        type="password"
-                        required
-                        placeholder="Confirm your new password"
-                        class="form-input"
-                      />
-                    </div>
-                  </div>
-                  <!-- Error message -->
-                  <template v-if="errMessages.length > 0">
-                    <alert type="error" :messages="errMessages"></alert>
-                  </template>
-                  <!-- Success message -->
-                  <template v-if="sucMessages.length > 0">
-                    <alert type="success" :messages="sucMessages"></alert>
-                  </template>
-                  <div>
-                    <button type="submit" class="theme-button">
-                      Reset Password
-                    </button>
-                  </div>
-                  <div class="flex items-center justify-center">
-                    <div class="text-sm text-center">
-                      <nuxt-link
-                        :to="{ name: 'login' }"
-                        class="font-medium theme-link"
-                      >
-                        Login now
-                      </nuxt-link>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+      <div class="mx-auto w-full max-w-sm lg:w-96">
+        <div>
+          <logo class="h-12"></logo>
+          <h2 class="split-title">Reset Password</h2>
         </div>
-        <div class="hidden lg:block relative w-0 flex-1">
-          <img
-            class="absolute inset-0 h-full w-full object-cover"
-            src="/images/login-bg.jpg"
-            alt=""
-          />
+
+        <div class="mt-8">
+          <div class="mt-6">
+            <form
+              action="#"
+              class="space-y-3"
+              @submit.prevent="resetPassword()"
+            >
+              <!-- Password -->
+              <div>
+                <label for="password" class="form-label"> Password </label>
+                <div class="mt-1">
+                  <input
+                    id="password"
+                    v-model="user.password"
+                    name="password"
+                    type="password"
+                    required
+                    placeholder="Enter your new password here"
+                    class="form-input"
+                  />
+                </div>
+              </div>
+              <!-- Confirm Password -->
+              <div>
+                <label for="passwordConfirm" class="form-label">
+                  Password Confirm
+                </label>
+                <div class="mt-1">
+                  <input
+                    id="passwordConfirm"
+                    v-model="user.passwordConfirm"
+                    name="passwordConfirm"
+                    type="password"
+                    required
+                    placeholder="Confirm your new password"
+                    class="form-input"
+                  />
+                </div>
+              </div>
+              <!-- Error message -->
+              <template v-if="errMessages.length > 0">
+                <alert type="error" :messages="errMessages"></alert>
+              </template>
+              <!-- Success message -->
+              <template v-if="sucMessages.length > 0">
+                <alert type="success" :messages="sucMessages"></alert>
+              </template>
+              <div>
+                <button type="submit" class="theme-button">
+                  Reset Password
+                </button>
+              </div>
+              <div class="flex items-center justify-center">
+                <div class="text-sm text-center">
+                  <nuxt-link
+                    :to="{ name: 'login' }"
+                    class="font-medium theme-link"
+                  >
+                    Login now
+                  </nuxt-link>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </template>
@@ -106,6 +93,7 @@
 
 <script>
 export default {
+  layout: 'splitPage',
   async asyncData({ params, $authApi }) {
     const id = params.id
     const sucMessages = []
