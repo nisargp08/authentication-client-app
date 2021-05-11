@@ -105,9 +105,7 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
 export default {
-  components: { Logo },
   async asyncData({ params, $authApi }) {
     const id = params.id
     const sucMessages = []

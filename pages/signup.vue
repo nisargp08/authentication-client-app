@@ -132,7 +132,9 @@
 </template>
 
 <script>
+import apiState from '~/mixins/apiState.js'
 export default {
+  mixins: [apiState],
   data() {
     return {
       user: {
@@ -141,7 +143,6 @@ export default {
         password: '',
         passwordConfirm: '',
       },
-      errMessages: [],
     }
   },
   methods: {
@@ -154,16 +155,8 @@ export default {
           this.$router.push({ name: 'login' })
         }
       } catch (err) {
-        if (err.message.includes(',')) {
-          const messages = err.message.split(',')
-          this.errMessages = messages
-        } else {
-          this.errMessages.push(err.message)
-        }
+        this.setErrorMessage(err)
       }
-    },
-    resetState() {
-      this.errMessages = []
     },
   },
 }

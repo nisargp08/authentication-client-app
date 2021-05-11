@@ -76,14 +76,14 @@
 </template>
 
 <script>
+import apiState from '~/mixins/apiState.js'
 export default {
+  mixins: [apiState],
   data() {
     return {
       user: {
         email: '',
       },
-      errMessages: [],
-      sucMessages: [],
     }
   },
   methods: {
@@ -97,17 +97,8 @@ export default {
           this.sucMessages.push(response.data.data.message)
         }
       } catch (err) {
-        if (err.message.includes(',')) {
-          const messages = err.message.split(',')
-          this.errMessages = messages
-        } else {
-          this.errMessages.push(err.message)
-        }
+        this.setErrorMessage(err)
       }
-    },
-    resetState() {
-      this.errMessages = []
-      this.sucMessages = []
     },
   },
 }

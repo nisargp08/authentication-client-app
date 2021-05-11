@@ -49,7 +49,7 @@
                     type="text"
                     autocomplete="email"
                     required
-                    placeholder="you@example.com"
+                    placeholder="ana99 / you@example.com"
                     class="form-input"
                   />
                 </div>
@@ -117,14 +117,15 @@
 </template>
 
 <script>
+import apiState from '~/mixins/apiState.js'
 export default {
+  mixins: [apiState],
   data() {
     return {
       user: {
         userId: '',
         password: '',
       },
-      errMessages: [],
     }
   },
   methods: {
@@ -137,16 +138,8 @@ export default {
           console.log(response.data)
         }
       } catch (err) {
-        if (err.message.includes(',')) {
-          const messages = err.message.split(',')
-          this.errMessages = messages
-        } else {
-          this.errMessages.push(err.message)
-        }
+        this.setErrorMessage(err)
       }
-    },
-    resetState() {
-      this.errMessages = []
     },
   },
 }
