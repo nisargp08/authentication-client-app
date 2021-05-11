@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'authentication-client-app',
+    title: `Nisarg's Authentication App`,
     htmlAttrs: {
       lang: 'en',
     },
