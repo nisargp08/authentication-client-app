@@ -1,6 +1,4 @@
 export default function ({ $axios }, inject) {
-  const authServer = 'http://localhost:5000/api/v1'
-
   inject('authApi', {
     registerUser,
     loginUser,
@@ -23,38 +21,35 @@ export default function ({ $axios }, inject) {
   }
   async function registerUser(user) {
     try {
-      return await $axios.post(`${authServer}/signup`, user)
+      return await $axios.post(`/signup`, user)
     } catch (err) {
       setErrorMessage(err)
     }
   }
   async function loginUser(user) {
     try {
-      return await $axios.post(`${authServer}/login`, user)
+      return await $axios.post(`/login`, user)
     } catch (err) {
       setErrorMessage(err)
     }
   }
   async function forgotPassword(user) {
     try {
-      return await $axios.patch(`${authServer}/forgotPassword`, user)
+      return await $axios.patch(`/forgotPassword`, user)
     } catch (err) {
       setErrorMessage(err)
     }
   }
   async function resetPassword(resetToken, user) {
     try {
-      return await $axios.patch(
-        `${authServer}/resetPassword/${resetToken}`,
-        user
-      )
+      return await $axios.patch(`/resetPassword/${resetToken}`, user)
     } catch (err) {
       setErrorMessage(err)
     }
   }
   async function checkResetToken(resetToken) {
     try {
-      return await $axios.get(`${authServer}/checkResetToken/${resetToken}`)
+      return await $axios.get(`/checkResetToken/${resetToken}`)
     } catch (err) {
       setErrorMessage(err)
     }
