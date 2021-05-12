@@ -3,18 +3,11 @@
     class="col-span-1 flex flex-col text-center bg-gray-700 rounded-lg shadow divide-y divide-gray-600 text-white"
   >
     <div class="flex-1 flex flex-col p-8">
-      <template v-if="!user.profilePhoto">
-        <icons-user
-          class="w-32 h-32 flex-shrink-0 mx-auto bg-gray-700 rounded-full object-cover"
-        ></icons-user>
-      </template>
-      <template v-else>
-        <img
-          class="w-32 h-32 flex-shrink-0 mx-auto bg-gray-700 rounded-full object-cover"
-          :src="user.profilePhoto"
-          :alt="user.name"
-        />
-      </template>
+      <img
+        class="w-32 h-32 flex-shrink-0 mx-auto bg-gray-700 rounded-full object-cover"
+        :src="getUserPhoto"
+        :alt="user.name"
+      />
       <h3 class="mt-6 text-white text-sm font-medium">@{{ user.username }}</h3>
       <dl class="mt-1 flex-grow flex flex-col justify-between">
         <dt class="sr-only">Title</dt>
@@ -63,6 +56,17 @@ export default {
     user: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    getUserPhoto() {
+      // If photo is provied then return the url
+      if (this.user.profilePhoto) {
+        return this.user.profilePhoto
+      } else {
+        // Else return the default image
+        return '/images/smiling.svg'
+      }
     },
   },
 }

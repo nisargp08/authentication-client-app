@@ -11,137 +11,150 @@
             /></nuxt-link>
           </div>
         </div>
-        <div class="hidden sm:ml-6 sm:block">
-          <div class="flex items-center">
-            <!-- Profile dropdown -->
-            <div class="ml-3 relative">
-              <div class="flex items-center space-x-3">
-                <span class="font-medium text-white">Hi, ana99</span>
-                <button
-                  id="user-menu-button"
-                  type="button"
-                  class="bg-gray-600 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-600 focus:ring-white"
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  @click="toggleMenu()"
-                >
-                  <span class="sr-only">Open user menu</span>
-                  <img
-                    class="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=7qwKjEp7Xv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                </button>
-              </div>
-              <div
-                v-if="isOpen"
-                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="user-menu-button"
-                tabindex="-1"
-              >
-                <!-- Active: "bg-gray-100", Not Active: "" -->
-                <a
-                  id="user-menu-item-0"
-                  href="#"
-                  class="flex items-center px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
-                  role="menuitem"
-                  tabindex="-1"
-                >
-                  <icons-user></icons-user>
-                  <span class="ml-2">Your Profile</span>
-                </a>
-                <a
-                  id="user-menu-item-2"
-                  href="#"
-                  class="flex items-center px-4 py-2 text-sm font-medium text-red-500 hover:bg-gray-100"
-                  role="menuitem"
-                  tabindex="-1"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+        <!-- If user is logged in -->
+        <template v-if="$auth.loggedIn">
+          <div class="hidden sm:ml-6 sm:block">
+            <div class="flex items-center">
+              <!-- Profile dropdown -->
+              <div class="ml-3 relative">
+                <div class="flex items-center space-x-3">
+                  <span class="font-medium text-white">Hi, ana99</span>
+                  <button
+                    id="user-menu-button"
+                    type="button"
+                    class="bg-gray-600 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-600 focus:ring-white"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    @click="toggleMenu()"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                    <span class="sr-only">Open user menu</span>
+                    <img
+                      class="h-8 w-8 rounded-full"
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=7qwKjEp7Xv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      alt=""
                     />
-                  </svg>
-                  <span class="ml-2">Logout</span>
-                </a>
+                  </button>
+                </div>
+                <div
+                  v-if="isOpen"
+                  class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="user-menu-button"
+                  tabindex="-1"
+                >
+                  <!-- Active: "bg-gray-100", Not Active: "" -->
+                  <a
+                    id="user-menu-item-0"
+                    href="#"
+                    class="flex items-center px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <icons-user></icons-user>
+                    <span class="ml-2">Your Profile</span>
+                  </a>
+                  <a
+                    id="user-menu-item-2"
+                    href="#"
+                    class="flex items-center px-4 py-2 text-sm font-medium text-red-500 hover:bg-gray-100"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                      />
+                    </svg>
+                    <span class="ml-2">Logout</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="-mr-2 flex sm:hidden">
-          <!-- Mobile menu button -->
-          <button
-            type="button"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-            aria-controls="mobile-menu"
-            aria-expanded="false"
-            @click="toggleMenu()"
-          >
-            <span class="sr-only">Open main menu</span>
-            <!--
+          <div class="-mr-2 flex sm:hidden">
+            <!-- Mobile menu button -->
+            <button
+              type="button"
+              class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+              @click="toggleMenu()"
+            >
+              <span class="sr-only">Open main menu</span>
+              <!--
             Icon when menu is closed.
 
             Heroicon name: outline/menu
 
             Menu open: "hidden", Menu closed: "block"
           -->
-            <svg
-              v-if="!isOpen"
-              class="block h-6 w-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-            <!--
+              <svg
+                v-if="!isOpen"
+                class="block h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+              <!--
             Icon when menu is open.
 
             Heroicon name: outline/x
 
             Menu open: "block", Menu closed: "hidden"
           -->
-            <svg
-              v-if="isOpen"
-              class="h-6 w-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
+              <svg
+                v-if="isOpen"
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </template>
+        <template v-else>
+          <div class="flex items-center gap-x-2">
+            <nuxt-link class="white-button" :to="{ name: 'login' }"
+              >Login</nuxt-link
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
+            <nuxt-link class="theme-button mt-0" :to="{ name: 'signup' }"
+              >Signup</nuxt-link
+            >
+          </div>
+        </template>
       </div>
     </div>
 
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div v-if="isOpen" id="mobile-menu" class="sm:hidden">
+    <div v-if="isOpen && $auth.loggedIn" id="mobile-menu" class="sm:hidden">
       <div class="pt-4 pb-3 border-t border-gray-700">
         <div class="flex items-center px-5">
           <div class="flex-shrink-0">
