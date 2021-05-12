@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="flex flex-col min-h-screen h-full bg-gray-800">
+    <navbar></navbar>
     <Nuxt />
   </div>
 </template>
