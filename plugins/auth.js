@@ -20,11 +20,7 @@ export default function (context, inject) {
   async function loginUser(user) {
     try {
       // Use auth module to login the user(look into nuxt.config file for more info)
-      const response = await context.$auth.loginWith('local', { data: user })
-      // Set user in app state(vuex) using auth module
-      context.$auth.setUser(response.data.data.user)
-      // Return full response
-      return response
+      return await context.$auth.loginWith('local', { data: user })
       // return await context.$axios.post(`/login`, user)
     } catch (err) {
       setErrorMessage(err)

@@ -50,11 +50,11 @@ export default {
           property: 'data.token',
         },
         user: {
-          autoFetch: false,
+          property: 'data',
         },
         endpoints: {
           login: { url: 'login', method: 'post' },
-          user: false,
+          user: { url: 'byToken', method: 'get' },
         },
       },
     },
