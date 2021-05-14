@@ -43,7 +43,22 @@ export default {
   },
 
   // Frontend auth
-  auth: {},
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'data.token',
+        },
+        user: {
+          autoFetch: false,
+        },
+        endpoints: {
+          login: { url: 'login', method: 'post' },
+          user: false,
+        },
+      },
+    },
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 }

@@ -1,6 +1,6 @@
 import { setErrorMessage } from '~/utils/helperFunctions'
 
-export default function ({ $axios }, inject) {
+export default function (context, inject) {
   inject('authApi', {
     registerUser,
     loginUser,
@@ -12,35 +12,41 @@ export default function ({ $axios }, inject) {
   // Functions
   async function registerUser(user) {
     try {
-      return await $axios.post(`/signup`, user)
+      return await context.$axios.post(`/signup`, user)
     } catch (err) {
       setErrorMessage(err)
     }
   }
   async function loginUser(user) {
     try {
-      return await $axios.post(`/login`, user)
+      // Use auth module to login the user(look into nuxt.config file for more info)
+      const response = await context.$auth.loginWith('local', { data: user })
+      // Set user in app state(vuex) using auth module
+      context.$auth.setUser(response.data.data.user)
+      // Return full response
+      return response
+      // return await context.$axios.post(`/login`, user)
     } catch (err) {
       setErrorMessage(err)
     }
   }
   async function forgotPassword(user) {
     try {
-      return await $axios.patch(`/forgotPassword`, user)
+      return await context.$axios.patch(`/forgotPassword`, user)
     } catch (err) {
       setErrorMessage(err)
     }
   }
   async function resetPassword(resetToken, user) {
     try {
-      return await $axios.patch(`/resetPassword/${resetToken}`, user)
+      return await context.$axios.patch(`/resetPassword/${resetToken}`, user)
     } catch (err) {
       setErrorMessage(err)
     }
   }
   async function checkResetToken(resetToken) {
     try {
-      return await $axios.get(`/checkResetToken/${resetToken}`)
+      return await context.$axios.get(`/checkResetToken/${resetToken}`)
     } catch (err) {
       setErrorMessage(err)
     }

@@ -113,17 +113,7 @@ export default {
     async loginUser() {
       try {
         this.resetState()
-        const response = await this.$authApi.loginUser(this.user)
-        const data = response.data.data
-        // User was successfully authenticated
-        if (response.status === 200) {
-          document.cookie = `token=${data.token}`
-          // Redirect to user profile page
-          this.$router.push({
-            name: 'user-id',
-            params: { id: data.user.username },
-          })
-        }
+        await this.$authApi.loginUser(this.user)
       } catch (err) {
         this.setErrorMessage(err)
       }
