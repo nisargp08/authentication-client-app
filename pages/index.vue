@@ -1,12 +1,13 @@
 <template>
-  <div
-    class="flex flex-col flex-1 items-center justify-center max-w-screen-2xl mx-auto"
-  >
+  <div>
     <icons-loading-spinner v-if="isLoading">
       <p class="text-white font-medium mt-2">Loading...</p>
     </icons-loading-spinner>
     <template v-else-if="errMessages.length > 0">
-      <div class="w-56 sm:w-80">
+      <h1 class="text-center text-2xl font-semibold text-red-500">
+        Oops ! Error Occured 💥
+      </h1>
+      <div class="w-56 sm:w-80 mt-8">
         <img src="/images/error.svg" alt="Error" />
       </div>
       <alert class="mt-4" type="error" :messages="errMessages"></alert>
