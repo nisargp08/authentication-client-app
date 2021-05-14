@@ -130,6 +130,10 @@ export default {
         const response = await this.$authApi.registerUser(this.user)
         // User was successfully created
         if (response.status === 201) {
+          this.$notification.generate({
+            title: 'Account has been successfully created!',
+            subtitle: 'Login to get access',
+          })
           this.$router.push({ name: 'login' })
         }
       } catch (err) {
