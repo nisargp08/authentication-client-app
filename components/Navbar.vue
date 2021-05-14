@@ -18,7 +18,9 @@
               <!-- Profile dropdown -->
               <div class="ml-3 relative">
                 <div class="flex items-center space-x-3">
-                  <span class="font-medium text-white">Hi, ana99</span>
+                  <span class="font-medium text-white"
+                    >Hi, {{ $auth.user.name }}</span
+                  >
                   <button
                     id="user-menu-button"
                     type="button"
@@ -29,8 +31,8 @@
                   >
                     <span class="sr-only">Open user menu</span>
                     <img
-                      class="h-8 w-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=7qwKjEp7Xv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      class="h-8 w-8 rounded-full object-cover"
+                      :src="getProfilePhoto($auth.user.profilePhoto)"
                       alt=""
                     />
                   </button>
@@ -238,6 +240,13 @@ export default {
   methods: {
     toggleMenu() {
       this.isOpen = !this.isOpen
+    },
+    getProfilePhoto(url) {
+      if (url) {
+        return url
+      } else {
+        return '/images/smiling.svg'
+      }
     },
   },
 }

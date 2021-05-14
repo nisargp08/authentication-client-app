@@ -18,7 +18,7 @@
       <div class="-mt-px flex">
         <div class="-ml-px w-0 flex-1 flex">
           <nuxt-link
-            :to="{ name: 'user-id', params: { id: user.username } }"
+            :to="{ name: 'id', params: { id: user.username } }"
             class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-300 font-medium border border-transparent rounded-br-lg hover:text-gray-400"
           >
             <!-- Heroicon name: solid/phone -->
