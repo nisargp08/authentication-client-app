@@ -33,12 +33,12 @@
                     <img
                       class="h-8 w-8 rounded-full object-cover"
                       :src="getProfilePhoto($auth.user.profilePhoto)"
-                      alt=""
+                      :alt="$auth.user.name"
                     />
                   </button>
                 </div>
                 <div
-                  v-if="isOpen"
+                  v-show="isOpen"
                   class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                   role="menu"
                   aria-orientation="vertical"
@@ -46,16 +46,16 @@
                   tabindex="-1"
                 >
                   <!-- Active: "bg-gray-100", Not Active: "" -->
-                  <a
+                  <nuxt-link
                     id="user-menu-item-0"
-                    href="#"
+                    :to="{ name: 'settings-profile' }"
                     class="flex items-center px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
                     role="menuitem"
                     tabindex="-1"
                   >
                     <icons-user></icons-user>
                     <span class="ml-2">Your Profile</span>
-                  </a>
+                  </nuxt-link>
                   <a
                     id="user-menu-item-2"
                     href="#"
@@ -101,7 +101,7 @@
             Menu open: "hidden", Menu closed: "block"
           -->
               <svg
-                v-if="!isOpen"
+                v-show="!isOpen"
                 class="block h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -124,7 +124,7 @@
             Menu open: "block", Menu closed: "hidden"
           -->
               <svg
-                v-if="isOpen"
+                v-show="isOpen"
                 class="h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

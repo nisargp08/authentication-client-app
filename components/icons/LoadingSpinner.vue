@@ -24,7 +24,7 @@
         ></path>
       </svg>
       <!-- Loading message slot -->
-      <div><slot></slot></div>
+      <div><p class="text-white font-medium mt-2">Loading...</p></div>
     </div>
   </div>
 </template>

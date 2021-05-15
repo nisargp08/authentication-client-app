@@ -4,6 +4,7 @@ export default function ({ $axios }, inject) {
   inject('userApi', {
     getAllUsers,
     getUserById,
+    updateUser,
   })
 
   async function getAllUsers() {
@@ -16,6 +17,13 @@ export default function ({ $axios }, inject) {
   async function getUserById(id) {
     try {
       return await $axios.$get(`/users/${id}`)
+    } catch (err) {
+      setErrorMessage(err)
+    }
+  }
+  async function updateUser(user) {
+    try {
+      return await $axios.$patch(`/users/updateProfile/`, user)
     } catch (err) {
       setErrorMessage(err)
     }

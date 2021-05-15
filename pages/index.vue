@@ -1,8 +1,6 @@
 <template>
   <div>
-    <icons-loading-spinner v-if="isLoading">
-      <p class="text-white font-medium mt-2">Loading...</p>
-    </icons-loading-spinner>
+    <icons-loading-spinner v-if="isLoading" />
     <template v-else-if="errMessages.length > 0">
       <api-error :messages="errMessages"></api-error>
     </template>

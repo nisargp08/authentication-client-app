@@ -55,12 +55,13 @@
               <!-- Edit button -->
               <template v-if="authorizedUser">
                 <div class="absolute top-0 right-0 px-4 bg-transparent">
-                  <a
+                  <nuxt-link
+                    :to="{ name: 'settings-profile' }"
                     type="button"
                     class="white-button bg-green-600 border-green-600 hover:bg-green-700"
                   >
                     Edit
-                  </a>
+                  </nuxt-link>
                 </div>
               </template>
             </div>
@@ -127,7 +128,7 @@ export default {
   },
   computed: {
     authorizedUser() {
-      if (this.$auth.user.username === this.user.username) {
+      if (this.$auth.user._id === this.user._id) {
         return true
       } else {
         return false
