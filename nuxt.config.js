@@ -33,6 +33,7 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/dayjs',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -63,6 +64,10 @@ export default {
         },
       },
     },
+  },
+
+  dayjs: {
+    plugins: ['relativeTime'],
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
