@@ -4,7 +4,9 @@
     <div
       class="flex flex-col flex-1 items-center max-w-screen-2xl w-full mx-auto text-white"
     >
-      <Nuxt />
+      <slot>
+        <Nuxt />
+      </slot>
     </div>
   </div>
 </template>
