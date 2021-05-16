@@ -7,6 +7,7 @@ export default function (context, inject) {
     forgotPassword,
     resetPassword,
     checkResetToken,
+    logout,
   })
 
   // Functions
@@ -43,6 +44,13 @@ export default function (context, inject) {
   async function checkResetToken(resetToken) {
     try {
       return await context.$axios.get(`/checkResetToken/${resetToken}`)
+    } catch (err) {
+      setErrorMessage(err)
+    }
+  }
+  async function logout() {
+    try {
+      return await context.$auth.logout('local')
     } catch (err) {
       setErrorMessage(err)
     }

@@ -6,6 +6,7 @@ export default function ({ $axios }, inject) {
     getUserById,
     updateUser,
     updatePassword,
+    deleteUser,
   })
 
   async function getAllUsers() {
@@ -32,6 +33,13 @@ export default function ({ $axios }, inject) {
   async function updatePassword(password) {
     try {
       return await $axios.$patch('/users/updatePassword', password)
+    } catch (err) {
+      setErrorMessage(err)
+    }
+  }
+  async function deleteUser() {
+    try {
+      return await $axios.$delete('/users/deleteAccount')
     } catch (err) {
       setErrorMessage(err)
     }

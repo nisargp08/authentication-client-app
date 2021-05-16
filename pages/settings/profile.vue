@@ -226,7 +226,10 @@ export default {
         }
         // Append other fields to formData object
         Object.keys(this.user).forEach((key) => {
-          formData.append(key, this.user[key])
+          // Only add to form if field is not empty
+          if (this.user[key]) {
+            formData.append(key, this.user[key])
+          }
         })
         // Send request to server to update the user profile
         const { data } = await this.$userApi.updateUser(formData)

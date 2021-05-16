@@ -17,7 +17,7 @@
         </div>
 
         <div class="mt-6 grid grid-cols-12 gap-6">
-          <div class="col-span-12 sm:col-span-6 sm:grid sm:grid-cols-1 gap-4">
+          <div class="col-span-12 sm:col-span-6 grid sm:grid-cols-1 gap-4">
             <div>
               <label
                 for="passwordCurrent"

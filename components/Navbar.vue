@@ -39,7 +39,7 @@
                 </div>
                 <div
                   v-show="isOpen"
-                  class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  class="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="user-menu-button"
@@ -48,7 +48,7 @@
                   <!-- Active: "bg-gray-100", Not Active: "" -->
                   <nuxt-link
                     id="user-menu-item-0"
-                    :to="{ name: 'settings-profile' }"
+                    :to="{ name: 'id', params: { id: $auth.user.username } }"
                     class="flex items-center px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
                     role="menuitem"
                     tabindex="-1"
@@ -56,27 +56,25 @@
                     <icons-user></icons-user>
                     <span class="ml-2">Your Profile</span>
                   </nuxt-link>
+                  <nuxt-link
+                    id="user-menu-item-0"
+                    :to="{ name: 'settings-profile' }"
+                    class="flex items-center px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <icons-settings></icons-settings>
+                    <span class="ml-2">Settings</span>
+                  </nuxt-link>
                   <a
                     id="user-menu-item-2"
                     href="#"
                     class="flex items-center px-4 py-2 text-sm font-medium text-red-500 hover:bg-gray-100"
                     role="menuitem"
                     tabindex="-1"
+                    @click="$auth.logout()"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-5 w-5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                      />
-                    </svg>
+                    <icons-logout></icons-logout>
                     <span class="ml-2">Logout</span>
                   </a>
                 </div>
@@ -175,26 +173,23 @@
         <div class="mt-4 px-2 space-y-1">
           <nuxt-link
             id="user-menu-item-0"
+            :to="{ name: 'id', params: { id: $auth.user.username } }"
+            class="flex items-center px-4 py-2 text-sm font-medium text-white"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <icons-user></icons-user>
+            <span class="ml-2">Your Profile</span>
+          </nuxt-link>
+          <nuxt-link
+            id="user-menu-item-0"
             :to="{ name: 'settings-profile' }"
             class="flex items-center px-4 py-2 text-sm font-medium text-white"
             role="menuitem"
             tabindex="-1"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <span class="ml-2">Your Profile</span>
+            <icons-settings></icons-settings>
+            <span class="ml-2">Settings</span>
           </nuxt-link>
           <a
             id="user-menu-item-1"
@@ -202,21 +197,9 @@
             class="flex items-center px-4 py-2 text-sm font-medium text-red-500"
             role="menuitem"
             tabindex="-1"
+            @click="$auth.logout()"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-              />
-            </svg>
+            <icons-logout></icons-logout>
             <span class="ml-2">Logout</span>
           </a>
         </div>
