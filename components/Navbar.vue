@@ -5,10 +5,10 @@
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <logo class="block lg:hidden h-8 w-auto" />
-            <nuxt-link :to="{ name: 'index' }"
-              ><logo class="hidden lg:block h-10 w-auto"
-            /></nuxt-link>
+            <nuxt-link :to="{ name: 'index' }">
+              <logo class="block lg:hidden h-8 w-auto" />
+              <logo class="hidden lg:block h-10 w-auto" />
+            </nuxt-link>
           </div>
         </div>
         <!-- If user is logged in -->
@@ -162,18 +162,20 @@
           <div class="flex-shrink-0">
             <img
               class="h-10 w-10 rounded-full"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=7qwKjEp7Xv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt=""
+              :src="getProfilePhoto($auth.user.profilePhoto)"
+              :alt="$auth.user.name"
             />
           </div>
           <div class="ml-3">
-            <div class="text-base font-medium text-white">Hi, Tom Cook</div>
+            <div class="text-base font-medium text-white">
+              Hi, {{ $auth.user.name }}
+            </div>
           </div>
         </div>
         <div class="mt-4 px-2 space-y-1">
-          <a
+          <nuxt-link
             id="user-menu-item-0"
-            href="#"
+            :to="{ name: 'settings-profile' }"
             class="flex items-center px-4 py-2 text-sm font-medium text-white"
             role="menuitem"
             tabindex="-1"
@@ -193,7 +195,7 @@
               />
             </svg>
             <span class="ml-2">Your Profile</span>
-          </a>
+          </nuxt-link>
           <a
             id="user-menu-item-1"
             href="#"

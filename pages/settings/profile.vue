@@ -162,9 +162,9 @@
                             aria-hidden="true"
                           >
                             <img
-                              class="rounded-full h-full w-full"
-                              src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixqx=7qwKjEp7Xv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80"
-                              alt=""
+                              class="rounded-full h-full w-full object-cover"
+                              :src="previewUrl"
+                              :alt="user.name"
                             />
                           </div>
                           <div class="ml-5 rounded-md shadow-sm">
@@ -183,6 +183,8 @@
                                 name="user_photo"
                                 type="file"
                                 class="absolute w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
+                                accept="image/*"
+                                @change="inputFile"
                               />
                             </div>
                           </div>
@@ -193,9 +195,9 @@
                         class="hidden relative rounded-full overflow-hidden lg:block"
                       >
                         <img
-                          class="relative rounded-full w-40 h-40"
-                          :src="getUserPhoto"
-                          alt=""
+                          class="relative rounded-full w-40 h-40 object-cover"
+                          :src="previewUrl"
+                          :alt="user.name"
                         />
                         <label
                           for="user-photo"
@@ -208,6 +210,8 @@
                             type="file"
                             name="user-photo"
                             class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
+                            accept="image/*"
+                            @change="inputFile"
                           />
                         </label>
                       </div>
@@ -291,6 +295,8 @@ export default {
   data() {
     return {
       isLoading: false,
+      selectedPhoto: null,
+      previewUrl: null,
       user: {
         username: this.$auth.user.username,
         name: this.$auth.user.name,
@@ -300,22 +306,27 @@ export default {
       },
     }
   },
-  computed: {
-    getUserPhoto() {
-      if (this.$auth.user.profilePhoto) {
-        return this.$auth.user.profilePhoto
-      } else {
-        return '/images/smiling.svg'
-      }
-    },
+  mounted() {
+    this.getUserPhoto()
   },
   methods: {
     async updateUser() {
       this.isLoading = true
       try {
+        const formData = new FormData()
         this.resetState()
-        const { data } = await this.$userApi.updateUser(this.user)
+        // Attach photo field is uploaded/changed
+        if (this.selectedPhoto) {
+          formData.append('profilePhoto', this.selectedPhoto)
+        }
+        // Append other fields to formData object
+        Object.keys(this.user).forEach((key) => {
+          formData.append(key, this.user[key])
+        })
+        // Send request to server to update the user profile
+        const { data } = await this.$userApi.updateUser(formData)
         if (data) {
+          // Give feedback to user on successfull profile update
           this.$notification.generate({
             title: 'Profile has been successfully updated',
           })
@@ -324,6 +335,51 @@ export default {
         this.setErrorMessage(err)
       }
       this.isLoading = false
+    },
+    getUserPhoto() {
+      if (this.$auth.user.profilePhoto) {
+        this.previewUrl = this.$auth.user.profilePhoto
+      } else {
+        this.previewUrl = '/images/smiling.svg'
+      }
+    },
+    inputFile($event) {
+      this.resetState()
+      const file = $event.target.files[0]
+      if (file) {
+        if (this.validateImage(file)) {
+          this.selectedPhoto = file
+          this.getDataUrl(file)
+        }
+      }
+    },
+    // Validate image
+    validateImage(file) {
+      let isValid = true
+      // Validate file input type
+      if (!file.type.match('image.*')) {
+        this.errMessages.push(`${file.name} is not a valid image type`)
+        isValid = false
+      }
+      // Validate file size
+      const maxSize = 10240 // (1024 * 10 = 10MB)
+      const fileSize = Math.round(file.size / 1024)
+      if (fileSize > maxSize) {
+        this.errMessages.push(
+          `${file.name} is greater than ${Math.round(maxSize / 1024)} MB`
+        )
+        isValid = false
+      }
+      // Return file status
+      return isValid
+    },
+    // Create file url for display
+    getDataUrl(file) {
+      const reader = new FileReader()
+      // Push the file base64 string to the array
+      reader.onload = (e) => (this.previewUrl = e.target.result)
+      // Call the onload function by calling 'readAsDataURL'
+      reader.readAsDataURL(file)
     },
   },
 }
