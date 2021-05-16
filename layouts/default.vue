@@ -30,33 +30,19 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+::-webkit-scrollbar {
+  width: 20px;
 }
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+::-webkit-scrollbar-track {
+  @apply bg-gray-800;
 }
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-700;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
 }
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-600;
 }
 </style>

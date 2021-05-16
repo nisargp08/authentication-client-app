@@ -17,13 +17,13 @@
             >
               <aside class="py-6 lg:col-span-3">
                 <nav class="space-y-1">
-                  <a
-                    href="#"
-                    class="bg-yellow-50 border-yellow-500 text-yellow-700 hover:bg-yellow-50 hover:text-yellow-700 group border-l-4 px-3 py-2 flex items-center text-sm font-medium"
+                  <nuxt-link
+                    :to="{ name: 'settings-profile' }"
+                    class="border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900 group border-l-4 px-3 py-2 flex items-center text-sm font-medium"
                     aria-current="page"
                   >
                     <svg
-                      class="text-yellow-500 group-hover:text-yellow-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                      class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -38,10 +38,10 @@
                       />
                     </svg>
                     <span class="truncate"> Profile </span>
-                  </a>
+                  </nuxt-link>
 
-                  <a
-                    href="#"
+                  <nuxt-link
+                    :to="{ name: 'settings-password' }"
                     class="border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900 group border-l-4 px-3 py-2 flex items-center text-sm font-medium"
                   >
                     <svg
@@ -60,7 +60,7 @@
                       />
                     </svg>
                     <span class="truncate"> Password </span>
-                  </a>
+                  </nuxt-link>
                 </nav>
               </aside>
               <div class="lg:col-span-9 text-gray-900">
@@ -80,5 +80,17 @@ export default {
   components: {
     defaultLayout,
   },
+  middleware: 'auth',
 }
 </script>
+
+<style scoped>
+.nuxt-link-active {
+  @apply bg-yellow-50 border-yellow-500 text-yellow-700 hover:bg-yellow-50 hover:text-yellow-700;
+}
+
+.nuxt-link-active svg,
+.nuxt-link-active:hover svg {
+  @apply text-yellow-500;
+}
+</style>

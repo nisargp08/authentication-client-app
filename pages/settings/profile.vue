@@ -181,12 +181,6 @@
         </template>
         <div class="flex justify-end sm:px-6">
           <button
-            type="button"
-            class="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500"
-          >
-            Cancel
-          </button>
-          <button
             type="submit"
             class="ml-4 theme-button inline-flex items-center mt-0 w-auto"
           >
@@ -203,7 +197,6 @@ import apiState from '~/mixins/apiState'
 export default {
   mixins: [apiState],
   layout: 'settings',
-  middleware: 'auth',
   data() {
     return {
       isLoading: false,
@@ -237,7 +230,10 @@ export default {
         })
         // Send request to server to update the user profile
         const { data } = await this.$userApi.updateUser(formData)
+
         if (data) {
+          // Update logged in user info
+          this.$auth.setUser(data)
           // Give feedback to user on successfull profile update
           this.$notification.generate({
             title: 'Profile has been successfully updated',
