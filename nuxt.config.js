@@ -45,7 +45,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseUrl: 'http://localhost:5000/api/v1',
+    baseUrl: process.env.API_SERVER,
   },
 
   // Frontend auth

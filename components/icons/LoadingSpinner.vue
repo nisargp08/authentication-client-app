@@ -24,7 +24,17 @@
         ></path>
       </svg>
       <!-- Loading message slot -->
-      <div><p class="text-white font-medium mt-2">Loading...</p></div>
+      <div class="text-center">
+        <p class="text-white font-medium mt-2">Loading...</p>
+        <div
+          class="py-2 px-4 text-sm font-medium bg-green-200 text-green-700 rounded-md mt-4"
+        >
+          <p>
+            First initial page load might take 15-30 seconds<br />
+            as heroku servers go to sleep when idle.😴
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
